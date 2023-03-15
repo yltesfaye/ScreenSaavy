@@ -1,0 +1,23 @@
+{
+  "name": "screensaavy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yltesfaye/ScreenSaavy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yltesfaye/ScreenSaavy/issues"
+  },
+  "homepage": "https://github.com/yltesfaye/ScreenSaavy#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

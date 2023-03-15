@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.active *{
+    margin-left: 10%;
+    font-size: 50px;
+}
 body{
     background-color: #131720;
     font-family: sans-serif;
