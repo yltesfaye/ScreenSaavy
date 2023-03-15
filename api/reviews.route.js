@@ -1,6 +1,13 @@
-import express from "express";
+import express from "express"
+import ReviewCtrl from "./reviews.controller.js"
+
 const router = express.Router()
 
-router.route("/").get((req, res) => res.send("Hello World"))
+router.route("/movie/:id").get(ReviewsCtrl.apiGetReviews)
+router.route("/new").post(ReviewCtrl.apiPostReview)
+router.route("/:id")
+    .get(ReviewCtrl.apiGetReviews)
+    .put(ReviewCtrl.apiUpdateReview)
+    .delete(ReviewCtrl.apiDeleteReview)
 
 export default router
