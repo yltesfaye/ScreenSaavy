@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/yltesfaye/ScreenSaavy#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0"
   }
 }
