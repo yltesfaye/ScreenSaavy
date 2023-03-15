@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors"
-import reveiws from "./api/reveiws.route.js"
+import reveiws from "./api/reviews.route.js"
 
 const app = express();
 
