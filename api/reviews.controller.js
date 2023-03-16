@@ -1,4 +1,4 @@
-import ReviewDAO from "../dao/reviewsDAO.js"
+import ReviewsDAO from "../dao/reviewsDAO.js"
 
 export default class ReviewsController {
     static async apiPostReview(req, res, next) {
@@ -7,7 +7,7 @@ export default class ReviewsController {
             const review = req.body.review
             const user = req.body.user
 
-            const reviewResponse = await ReviewDAO.addReview(
+            const reviewResponse = await ReviewsDAO.addReview(
                 movieId, 
                 user,
                 review
@@ -22,7 +22,7 @@ export default class ReviewsController {
     static async apiGetReview(req, res, next) {
         try{
             let id = req.params.id || {}
-            let review = await ReviewDAO.getReview(id)
+            let review = await ReviewsDAO.getReview(id)
             if(!review) {
                 res.status(404).json({error: "Not Found"})
                 return
@@ -42,7 +42,7 @@ export default class ReviewsController {
             const review = req.body.review
             const user = req.body.user
 
-            const reviewResponse = await ReviewDAO.updateReview(
+            const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
                 user,
                 review
@@ -67,7 +67,7 @@ export default class ReviewsController {
     static async apiDeleteReview(req, res, next) {
         try{
             const reviewId = req.params.id
-            const reviewResponse = await ReviewDAO.deleteReview(reviewId)
+            const reviewResponse = await ReviewsDAO.deleteReview(reviewId)
             res.json({status: "success"})
         } catch(e) {
             res.status(500).json({error: e.message})
@@ -76,8 +76,8 @@ export default class ReviewsController {
     
     static async apiGetReviews(req, res, next) {
         try{
-            let id = req.params.id || {}
-            let reviews = await ReviewDAO.getReviewByMovieId(id) 
+            let id = req.params.id || {} //problem
+            let reviews = await ReviewsDAO.getReview(id) 
             if(!reviews) {
                 res.status(404).json({error: "Not found"})
                 return

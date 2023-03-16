@@ -1,5 +1,7 @@
 import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectId
+//const ObjectId = mongodb.ObjectId
+import { ObjectId } from 'mongodb';
+const id = new ObjectId();
 
 
 let reviews
@@ -40,10 +42,10 @@ export default class ReviewDAO {
         }
     }
 
-    static async updateReview(reviewID, user, review) {
+    static async updateReview(reviewId, user, review) {
         try{
             const updateResponse = await reviews.updateOne(
-                { _id: ObjectId(reviewID)},
+                { _id: ObjectId(reviewId)},
                 { $set: {user: user, review: review}}
             )
 
