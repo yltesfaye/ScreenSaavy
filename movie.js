@@ -7,7 +7,27 @@ const APILINK = 'http://localhost:8000/api/v1/reviews/';
 
 const main = document.getElementById("section");
 const title = document.getElementById("title");
+
 title.innerText = movieTitle;
+
+const div_new = document.createElement('div');
+div_new.innerHTML = `
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                New Review
+                <p><strong> Review: </strong>
+                    <input type="text" id="new_review" value="">
+                </p>
+                <p><strong>User: </strong>
+                    <input type="text" id="new_user" value="">
+                </p>
+                <p> <a href="#" onclick="saveReview('new_review', 'new_user')"> save</a>
+                </p>
+            </div>
+        </div>
+    </div>
+`
 
 
 returnReviews(APILINK)
@@ -60,21 +80,46 @@ function editReview(id, review, user) {
 }
 
 
-function saveReview(reviewInputId, userInputId, id) {
+function saveReview(reviewInputId, userInputId, id="") {
     const review = document.getElementById(reviewInputId).value;
-    const user = document.getElementById
+    const user = document.getElementById(userInputId).value;
+    if(id) {
+        fetch(APILINK + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"user": user, "review": review})
+    }).then(res => res.json())
+      .then(res=> {
+        console.log(res)
+        location.reload();
+      });
+    } else {
+        fetch(APILINK + "new", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"user": user, "review": review, "movieId": movieId})
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res)
+                location.reload();
+            })
+    }
+    
 }
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    main.innerHTML = ''; //remove movie
 
-    const searchItem = search.value;
-
-    if(searchItem) {
-        returnMovies(SEARCHAPI + searchItem)
-        search.value = "";
-    }
-        
-
-});
+function deleteReview(id) {
+    fetch(APILINK + id, {
+        method: 'DELETE'
+    }).then(res => res.json())
+        .then(res => {
+            console.log(res)
+            location.reload();
+        });
+}
